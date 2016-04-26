@@ -9,56 +9,114 @@ traefik:
     - /var/run/docker.sock:/var/run/docker.sock
     - /dev/null:/traefik.toml
 
-intervention:
-  image: teamdronefireman/intervention-service
-  container_name: intervention-service
-  ports:
-    - "12345:3000"
-  labels:
-    - "traefik.backend=intervention"
-    - "traefik.frontend.rule=Host:intervention.docker.localhost"
-
 user:
   image: teamdronefireman/user-service
   container_name: user-service
   ports:
-    - "12346:3000"
+    - "10000:3000"
   labels:
     - "traefik.backend=user"
     - "traefik.frontend.rule=Host:user.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
+intervention:
+  image: teamdronefireman/intervention-service
+  container_name: intervention-service
+  ports:
+    - "10001:3000"
+  labels:
+    - "traefik.backend=intervention"
+    - "traefik.frontend.rule=Host:intervention.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
 
 mean:
   image: teamdronefireman/mean-service
   container_name: mean-service
   ports:
-    - "12347:3000"
+    - "10002:3000"
   labels:
     - "traefik.backend=mean"
     - "traefik.frontend.rule=Host:mean.docker.localhost"
-
-sinister:
-  image: teamdronefireman/sinister-service
-  container_name: sinister-service
-  ports:
-    - "12348:3000"
-  labels:
-    - "traefik.backend=sinister"
-    - "traefik.frontend.rule=Host:sinister.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
 
 drone:
   image: teamdronefireman/drone-service
   container_name: drone-service
   ports:
-    - "12349:3000"
+    - "10003:3000"
   labels:
     - "traefik.backend=drone"
     - "traefik.frontend.rule=Host:drone.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
 
 sig:
   image: teamdronefireman/sig-service
   container_name: sig-service
   ports:
-    - "12350:3000"
+    - "10004:3000"
   labels:
     - "traefik.backend=sig"
     - "traefik.frontend.rule=Host:sig.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
+sinister:
+  image: teamdronefireman/sinister-service
+  container_name: sinister-service
+  ports:
+    - "10005:3000"
+  labels:
+    - "traefik.backend=sinister"
+    - "traefik.frontend.rule=Host:sinister.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
+push:
+  image: teamdronefireman/push-service
+  container_name: push-service
+  ports:
+    - "10006:3000"
+  labels:
+    - "traefik.backend=push"
+    - "traefik.frontend.rule=Host:push.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
+sig-extern:
+  image: teamdronefireman/sig-extern-service
+  container_name: sig-extern-service
+  ports:
+    - "10007:3000"
+  labels:
+    - "traefik.backend=sig-extern"
+    - "traefik.frontend.rule=Host:sig-extern.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
+mongo-prod:
+  image: mongo
+  container_name: mongo-prod
+  ports:
+    - "27017:27017"
+  volumes_from:
+    - mongo-data-volume
