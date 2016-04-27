@@ -28,6 +28,6 @@ curl -H 'Host: push.docker.localhost' localhost/api/Pushes/health
 curl -H 'Host: push.docker.localhost' localhost
 echo
 echo 'SIGEXT'
-curl -H 'Host: sig-extern.docker.localhost' localhost/api/SIGExterns/health
+curl -H 'Host: sig-extern.docker.localhost' localhost/externe/api/SIGExterns/health
 curl -H 'Host: sig-extern.docker.localhost' localhost
 echo

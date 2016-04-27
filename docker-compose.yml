@@ -119,4 +119,4 @@ mongo-prod:
   ports:
     - "27017:27017"
   volumes_from:
-    - mongo-data-volume
+    - mongo-prod-data-volume
