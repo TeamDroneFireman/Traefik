@@ -74,6 +74,32 @@ sig:
   environment:
     - NODE_ENV=PROD
 
+image:
+  image: teamdronefireman/image-service
+  container_name: image-service
+  ports:
+    - "12353:3000"
+  labels:
+    - "traefik.backend=image"
+    - "traefik.frontend.rule=Host:image.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
+register:
+  image: teamdronefireman/register-service
+  container_name: register-service
+  ports:
+    - "12354:3000"
+  labels:
+    - "traefik.backend=register"
+    - "traefik.frontend.rule=Host:register.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
 sinister:
   image: teamdronefireman/sinister-service
   container_name: sinister-service

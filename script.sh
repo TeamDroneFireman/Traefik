@@ -31,3 +31,11 @@ echo 'SIGEXT'
 curl -H 'Host: sig-extern.docker.localhost' localhost/externe/api/SIGExterns/health
 curl -H 'Host: sig-extern.docker.localhost' localhost
 echo
+echo 'Register'
+curl -H 'Host: register.docker.localhost' localhost/api/Registers/health
+curl -H 'Host: register.docker.localhost' localhost
+echo
+echo 'Image'
+curl -H 'Host: image.docker.localhost' localhost/api/Images/health
+curl -H 'Host: image.docker.localhost' localhost
+echo
