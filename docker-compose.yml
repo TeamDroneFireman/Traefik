@@ -89,19 +89,6 @@ image:
   environment:
     - NODE_ENV=PROD
 
-register:
-  image: teamdronefireman/register-service
-  container_name: register-service
-  ports:
-    - "12354:3000"
-  labels:
-    - "traefik.backend=register"
-    - "traefik.frontend.rule=Host:register.docker.localhost"
-  links:
-    - mongo-prod:mongo
-  environment:
-    - NODE_ENV=PROD
-
 sinister:
   image: teamdronefireman/sinister-service
   container_name: sinister-service
@@ -110,19 +97,6 @@ sinister:
   labels:
     - "traefik.backend=sinister"
     - "traefik.frontend.rule=Host:sinister.docker.localhost"
-  links:
-    - mongo-prod:mongo
-  environment:
-    - NODE_ENV=PROD
-
-push:
-  image: teamdronefireman/push-service
-  container_name: push-service
-  ports:
-    - "12351:3000"
-  labels:
-    - "traefik.backend=push"
-    - "traefik.frontend.rule=Host:push.docker.localhost"
   links:
     - mongo-prod:mongo
   environment:
