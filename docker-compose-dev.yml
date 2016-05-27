@@ -34,6 +34,8 @@ intervention:
     - mongo-dev:mongo
   environment:
     - NODE_ENV=DEV
+  volumes:
+    - /teamdronefireman/gcm:/
 
 mean:
   image: teamdronefireman/mean-service
