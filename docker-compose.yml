@@ -35,7 +35,7 @@ intervention:
   environment:
     - NODE_ENV=PROD
   volumes:
-    - /teamdronefireman/gcm:/
+    - /root/teamdronefireman/gcm:/
 
 mean:
   image: teamdronefireman/mean-service
