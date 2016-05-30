@@ -35,7 +35,7 @@ intervention:
   environment:
     - NODE_ENV=DEV
   volumes:
-    - "/root/teamdronefireman/gcm"
+    - /root/teamdronefireman/gcm:/root/teamdronefireman/gcm
 
 mean:
   image: teamdronefireman/mean-service
@@ -62,6 +62,8 @@ drone:
     - mongo-dev:mongo
   environment:
     - NODE_ENV=DEV
+  volumes:
+    - /root/teamdronefireman/gcm:/root/teamdronefireman/gcm
 
 sig:
   image: teamdronefireman/sig-service
