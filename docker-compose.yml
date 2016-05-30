@@ -62,8 +62,6 @@ drone:
     - mongo-prod:mongo
   environment:
     - NODE_ENV=PROD
-  volumes:
-    - /root/teamdronefireman/gcm:/root/teamdronefireman/gcm
 
 sig:
   image: teamdronefireman/sig-service
