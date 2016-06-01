@@ -22,6 +22,19 @@ user:
   environment:
     - NODE_ENV=PROD
 
+push:
+  image: teamdronefireman/push-service
+  container_name: push-service
+  ports:
+    - "12351:3000"
+  labels:
+    - "traefik.backend=push"
+    - "traefik.frontend.rule=Host:push.docker.localhost"
+  links:
+    - mongo-prod:mongo
+  environment:
+    - NODE_ENV=PROD
+
 intervention:
   image: teamdronefireman/intervention-service
   container_name: intervention-service

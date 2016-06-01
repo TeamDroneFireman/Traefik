@@ -22,6 +22,19 @@ user:
   environment:
     - NODE_ENV=DEV
 
+push:
+  image: teamdronefireman/push-service
+  container_name: push-dev-service
+  ports:
+    - "12351:3000"
+  labels:
+    - "traefik.backend=push-dev"
+    - "traefik.frontend.rule=Host:push.docker.localhost"
+  links:
+    - mongo-dev:mongo
+  environment:
+    - NODE_ENV=DEV
+
 intervention:
   image: teamdronefireman/intervention-service
   container_name: intervention-dev-service
